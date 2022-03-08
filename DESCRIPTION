@@ -1,9 +1,9 @@
 Type: Package
 Package: FactorAssumptions
 Title: Set of Assumptions for Factor and Principal Component Analysis
-Version: 1.1.2
-Authors@R: person("Jose", "Storopoli", role = c("aut", "cre"), email = "thestoropoli@gmail.com", comment = c(ORCID = "0000-0002-0559-5176"))
-Maintainer: Jose Storopoli <thestoropoli@gmail.com>
+Version: 2.0.1
+Authors@R: person("Jose", "Storopoli", role = c("aut", "cre"), email = "jstoropoli@protonmail.com", comment = c(ORCID = "0000-0002-0559-5176"))
+Maintainer: Jose Storopoli <jstoropoli@protonmail.com>
 Description: Tests for Kaiser-Meyer-Olkin (KMO) and
     communalities in a dataset. It provides a final sample by removing
     variables in a iterable manner while keeping account of the variables
@@ -16,10 +16,9 @@ Depends: R (>= 3.6.0), MASS, psych
 Suggests: knitr, rmarkdown, testthat (>= 2.1.0)
 VignetteBuilder: knitr
 Encoding: UTF-8
-LazyData: true
 RoxygenNote: 7.0.2
 NeedsCompilation: no
-Packaged: 2020-02-29 15:32:34 UTC; storopoli
+Packaged: 2022-03-08 09:00:22 UTC; storopoli
 Author: Jose Storopoli [aut, cre] (<https://orcid.org/0000-0002-0559-5176>)
 Repository: CRAN
-Date/Publication: 2020-03-06 17:10:02 UTC
+Date/Publication: 2022-03-08 13:20:08 UTC

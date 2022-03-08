@@ -29,12 +29,29 @@ document.addEventListener('DOMContentLoaded', function(e) {
 });
 </script>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -119,6 +136,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </script>
 
 
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
 
 <style type="text/css">body {
 background-color: #fff;
@@ -321,21 +361,44 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div id="factorassumptions" class="section level1">
 <h1>FactorAssumptions</h1>
 <p>Set of Assumptions for Factor and Principal Component Analysis</p>
-<p>Description:Tests for Kaiser-Meyer-Olkin (KMO) and communalities in a dataset. It provides a final sample by removing variables in a iterable manner while keeping account of the variables that were removed in each step.</p>
+<p>Description:Tests for Kaiser-Meyer-Olkin (KMO) and communalities in a
+dataset. It provides a final sample by removing variables in a iterable
+manner while keeping account of the variables that were removed in each
+step.</p>
 <div id="what-is-kmo-and-communalities" class="section level2">
 <h2>What is KMO and Communalities?</h2>
-<p><em>Factor Analysis</em> and <em>Principal Components Analysis</em> (PCA) have some precautions and assumptions to be observed (<span class="citation">Hair et al. (2018)</span>).</p>
-<p>The first one is the KMO (Kaiser-Meyer-Olkin) measure, which measures the proportion of variance among the variables that can be derived from the common variance, also called systematic variance. KMO is computed between 0 and 1. Low values (close to 0) indicate that there are large partial correlations in comparison to the sum of the correlations, that is, there is a predominance of correlations of the variables that are problematic for the factorial/principal component analysis. <span class="citation">Hair et al. (2018)</span> suggest that individual KMOs smaller than 0.5 be removed from the factorial/principal component analysis. Consequently, this removal causes the overall KMO of the remaining variables of the factor/principal component analysis to be greater than 0.5.</p>
-<p>The second assumption of a valid factor or PCA analysis is the communality of the rotated variables. The commonalities indicate the common variance shared by factors/components with certain variables. Greater communality indicated that a greater amount of variance in the variable was extracted by the factorial/principal component solution. For a better measurement of factorial/principal component analysis, communalities should be 0.5 or greater (<span class="citation">Hair et al. (2018)</span>).</p>
+<p><em>Factor Analysis</em> and <em>Principal Components Analysis</em>
+(PCA) have some precautions and assumptions to be observed (<span class="citation">Hair et al. (2018)</span>).</p>
+<p>The first one is the KMO (Kaiser-Meyer-Olkin) measure, which measures
+the proportion of variance among the variables that can be derived from
+the common variance, also called systematic variance. KMO is computed
+between 0 and 1. Low values (close to 0) indicate that there are large
+partial correlations in comparison to the sum of the correlations, that
+is, there is a predominance of correlations of the variables that are
+problematic for the factorial/principal component analysis. <span class="citation">Hair et al. (2018)</span> suggest that individual KMOs
+smaller than 0.5 be removed from the factorial/principal component
+analysis. Consequently, this removal causes the overall KMO of the
+remaining variables of the factor/principal component analysis to be
+greater than 0.5.</p>
+<p>The second assumption of a valid factor or PCA analysis is the
+communality of the rotated variables. The commonalities indicate the
+common variance shared by factors/components with certain variables.
+Greater communality indicated that a greater amount of variance in the
+variable was extracted by the factorial/principal component solution.
+For a better measurement of factorial/principal component analysis,
+communalities should be 0.5 or greater (<span class="citation">Hair et
+al. (2018)</span>).</p>
 </div>
 <div id="loading-an-example-dataset" class="section level2">
 <h2>Loading an example dataset</h2>
-<p>First we will load an example dataset <code>bfi</code> from <code>psych</code> and load the package <code>FactorAssumptions</code></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(FactorAssumptions, <span class="dt">quietly =</span> T, <span class="dt">verbose =</span> F)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>bfi_data &lt;-<span class="st"> </span>bfi</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="co">#Remove rows with missing values and keep only complete cases</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>bfi_data &lt;-<span class="st"> </span>bfi_data[<span class="kw">complete.cases</span>(bfi_data),]</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">head</span>(bfi_data)</span></code></pre></div>
+<p>First we will load an example dataset <code>bfi</code> from
+<code>psych</code> and load the package
+<code>FactorAssumptions</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(FactorAssumptions, <span class="at">quietly =</span> T, <span class="at">verbose =</span> F)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>bfi_data <span class="ot">&lt;-</span> bfi</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove rows with missing values and keep only complete cases</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>bfi_data <span class="ot">&lt;-</span> bfi_data[<span class="fu">complete.cases</span>(bfi_data),]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(bfi_data)</span></code></pre></div>
 <pre><code>##       A1 A2 A3 A4 A5 C1 C2 C3 C4 C5 E1 E2 E3 E4 E5 N1 N2 N3 N4 N5 O1 O2 O3 O4
 ## 61623  6  6  5  6  5  6  6  6  1  3  2  1  6  5  6  3  5  2  2  3  4  3  5  6
 ## 61629  4  3  1  5  1  3  2  4  2  4  3  6  4  2  1  6  3  2  6  4  3  2  4  5
@@ -353,45 +416,66 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="performing-the-kmo-assumptions" class="section level2">
 <h2>Performing the KMO Assumptions</h2>
-<p>First we will perform the <span class="math inline">\(KMO &gt; 0.5 assumption\)</span> for all individuals variables in the dataset with the <code>kmo_optimal_solution</code> function</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>kmo_bfi &lt;-<span class="st"> </span><span class="kw">kmo_optimal_solution</span>(bfi_data, <span class="dt">squared =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p>First we will perform the <span class="math inline">\(KMO &gt; 0.5
+assumption\)</span> for all individuals variables in the dataset with
+the <code>kmo_optimal_solution</code> function</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>kmo_bfi <span class="ot">&lt;-</span> <span class="fu">kmo_optimal_solution</span>(bfi_data, <span class="at">squared =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## Final Solution Achieved!</code></pre>
 <p>Note that the <code>kmo_optimal_solution</code> outputs a list:</p>
 <ol style="list-style-type: decimal">
 <li>the final solution as <code>df</code></li>
-<li>removed variables with <span class="math inline">\(invidual KMO &lt; 0.5\)</span> as <code>removed</code></li>
+<li>removed variables with <span class="math inline">\(invidual KMO &lt;
+0.5\)</span> as <code>removed</code></li>
 <li>Anti-image covariance matrix as <code>AIS</code></li>
 <li>Anti-image correlation matrix as <code>AIR</code></li>
 </ol>
-<p>In our case none of the variables were removed due to low individual KMO values</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>kmo_bfi<span class="op">$</span>removed</span></code></pre></div>
+<p>In our case none of the variables were removed due to low individual
+KMO values</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>kmo_bfi<span class="sc">$</span>removed</span></code></pre></div>
 <pre><code>## NULL</code></pre>
 </div>
 <div id="performing-the-communalities-assumptions" class="section level2">
 <h2>Performing the Communalities Assumptions</h2>
-<p>The parallel analysis of <code>bfi</code> data suggests seven factors we will then perform the assumptions for all <span class="math inline">\(individual communalities &gt; 0.5\)</span> with the argument <code>nfactors</code> set to 7.</p>
-<p>We can use either the values <code>principal</code> or <code>fa</code> functions from <code>psych</code> package for argument <code>type</code> as desired:</p>
+<p>The parallel analysis of <code>bfi</code> data suggests seven factors
+we will then perform the assumptions for all <span class="math inline">\(individual communalities &gt; 0.5\)</span> with
+the argument <code>nfactors</code> set to 7.</p>
+<p>We can use either the values <code>principal</code> or
+<code>fa</code> functions from <code>psych</code> package for argument
+<code>type</code> as desired:</p>
 <ul>
-<li><code>principal</code> will perform a <em>Principal Component Analysis</em> (PCA)</li>
+<li><code>principal</code> will perform a <em>Principal Component
+Analysis</em> (PCA)</li>
 <li><code>fa</code> will perform a <em>Factor Analysis</em></li>
 </ul>
-<p><em>Note</em>: we are using the <code>df</code> generated from the <code>kmo_optimal_solution</code> function <em>Note 2</em>: the default of rotation employed by the <code>communalities_optimal_solution</code> is <code>varimax</code>. You can change if you want.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>comm_bfi &lt;-<span class="st"> </span><span class="kw">communalities_optimal_solution</span>(kmo_bfi<span class="op">$</span>df, <span class="dt">type =</span> <span class="st">&quot;principal&quot;</span>, <span class="dt">nfactors =</span> <span class="dv">7</span>, <span class="dt">squared =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<p><em>Note</em>: we are using the <code>df</code> generated from the
+<code>kmo_optimal_solution</code> function <em>Note 2</em>: the default
+of rotation employed by the <code>communalities_optimal_solution</code>
+is <code>varimax</code>. You can change if you want.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>comm_bfi <span class="ot">&lt;-</span> <span class="fu">communalities_optimal_solution</span>(kmo_bfi<span class="sc">$</span>df, <span class="at">type =</span> <span class="st">&quot;principal&quot;</span>, <span class="at">nfactors =</span> <span class="dv">7</span>, <span class="at">squared =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <pre><code>## There is still an individual communality value below 0.5: A4 - 0.423382853387628</code></pre>
-<pre><code>## There is still an individual communality value below 0.5: O4 - 0.473944505255499</code></pre>
+<pre><code>## There is still an individual communality value below 0.5: O4 - 0.4739445052555</code></pre>
 <pre><code>## There is still an individual communality value below 0.5: C1 - 0.494613330049183</code></pre>
-<p>Note that the <code>communalities_optimal_solution</code> outputs a list:</p>
+<p>Note that the <code>communalities_optimal_solution</code> outputs a
+list:</p>
 <ol style="list-style-type: decimal">
 <li>the final solution as <code>df</code></li>
-<li>removed variables with <span class="math inline">\(invidual communalities &lt; 0.5\)</span> as <code>removed</code></li>
-<li>A table with the communalities loadings from the variables final iteration as <code>loadings</code></li>
-<li>Results of the final iteration of either the <code>principal</code> or <code>fa</code> functions from <code>psych</code> package as <code>results</code></li>
+<li>removed variables with <span class="math inline">\(invidual
+communalities &lt; 0.5\)</span> as <code>removed</code></li>
+<li>A table with the communalities loadings from the variables final
+iteration as <code>loadings</code></li>
+<li>Results of the final iteration of either the <code>principal</code>
+or <code>fa</code> functions from <code>psych</code> package as
+<code>results</code></li>
 </ol>
-<p>In our case 3 variables were removed in an iterable fashion due to low individual communality values. And they are listed from the lowest communality that were removed until rendered an optimal solution.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>comm_bfi<span class="op">$</span>removed</span></code></pre></div>
+<p>In our case 3 variables were removed in an iterable fashion due to
+low individual communality values. And they are listed from the lowest
+communality that were removed until rendered an optimal solution.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>comm_bfi<span class="sc">$</span>removed</span></code></pre></div>
 <pre><code>## [1] &quot;A4&quot; &quot;O4&quot; &quot;C1&quot;</code></pre>
-<p>And finally we arrive at our final principal components analysis rotated matrix. You can export it as a CSV with <code>write.csv</code> or <code>write.csv2</code></p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>comm_bfi<span class="op">$</span>results</span></code></pre></div>
+<p>And finally we arrive at our final principal components analysis
+rotated matrix. You can export it as a CSV with <code>write.csv</code>
+or <code>write.csv2</code></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>comm_bfi<span class="sc">$</span>results</span></code></pre></div>
 <pre><code>## Principal Components Analysis
 ## Call: principal(r = df, nfactors = nfactors, scores = T)
 ## Standardized loadings (pattern matrix) based upon correlation matrix
@@ -440,9 +524,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 </div>
 <div id="references" class="section level1 unnumbered">
 <h1 class="unnumbered">References</h1>
-<div id="refs" class="references hanging-indent">
-<div id="ref-hair2018">
-<p>Hair, Joseph F., William C. Black, Barry J. Babin, and Rolph E. Anderson. 2018. <em>Multivariate Data Analysis</em>. 8th ed. Cengage Learning.</p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hair2018" class="csl-entry">
+Hair, Joseph F., William C. Black, Barry J. Babin, and Rolph E.
+Anderson. 2018. <em>Multivariate Data Analysis</em>. 8th ed. Cengage
+Learning.
 </div>
 </div>
 </div>
